@@ -1,0 +1,25 @@
+import openai
+
+# Set your OpenAI API key
+api_key = 'YOUR_API_KEY'
+
+# Function to interact with GPT-3
+def chat_with_ai(prompt):
+    response = openai.Completion.create(
+        engine="text-davinci-002",  # You can use different engines
+        prompt=prompt,
+        max_tokens=50,  # Adjust the length of the response as needed
+        api_key=api_key
+    )
+    return response.choices[0].text
+
+# Start a conversation with the AI
+print("AI: Hello! How can I assist you today?")
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == 'exit':
+        print("AI: Goodbye!")
+        break
+    prompt = f"You: {user_input}\nAI:"
+    response = chat_with_ai(prompt)
+    print("AI:", response)
